@@ -1,0 +1,20 @@
+logging.level.com.orange.clara.tool: INFO
+spring.devtools.livereload.enabled: false
+server.port: 8081
+#spring.datasource.url: jdbc:mysql://localhost:3306/deviswatching
+#spring.datasource.username: root
+#spring.datasource.password: ~
+#spring.jpa.hibernate.ddl-auto: update
+security:
+  user:
+    password: none
+  oauth2:
+    client:
+      accessTokenUri: ${CF_TARGET:http://fake.uaa.com}/oauth/token
+      userAuthorizationUri: ${CF_TARGET:http://fake.uaa.com}/oauth/authorize
+      clientAuthenticationScheme: header
+      scope:
+      - openid
+    resource:
+      userInfoUri: ${CF_TARGET:http://fake.uaa.com}/userinfo
+      preferTokenInfo: false

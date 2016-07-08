@@ -1,0 +1,15 @@
+logging.level.: INFO
+oauth.provider.type: github
+security:
+  user:
+    password: none
+  oauth2:
+    client:
+      accessTokenUri: https://github.com/login/oauth/access_token
+      userAuthorizationUri: https://github.com/login/oauth/authorize
+      clientAuthenticationScheme: header
+      scope:
+      - openid
+    resource:
+      userInfoUri: https://api.github.com/user
+      preferTokenInfo: false
