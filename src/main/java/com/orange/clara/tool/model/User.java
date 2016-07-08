@@ -3,6 +3,8 @@ package com.orange.clara.tool.model;
 import com.google.common.collect.Lists;
 
 import javax.persistence.*;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +27,8 @@ public class User {
 
     protected String email;
 
+    protected Date lastWatch;
+
     @ManyToMany
     @JoinTable(
             name = "users_roles",
@@ -41,6 +45,7 @@ public class User {
     public User() {
         watchedResources = Lists.newArrayList();
         roles = Lists.newArrayList();
+        lastWatch = Calendar.getInstance().getTime();
     }
 
     public User(String uuid, String name, String email) {
@@ -80,6 +85,18 @@ public class User {
 
     public void setWatchedResources(List<WatchedResource> watchedResources) {
         this.watchedResources = watchedResources;
+    }
+
+    public void updateLastWatch() {
+        this.lastWatch = Calendar.getInstance().getTime();
+    }
+
+    public Date getLastWatch() {
+        return lastWatch;
+    }
+
+    public void setLastWatch(Date lastWatch) {
+        this.lastWatch = lastWatch;
     }
 
     public void addWatchedResource(WatchedResource watchedResource) {

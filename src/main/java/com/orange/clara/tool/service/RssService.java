@@ -35,8 +35,8 @@ import java.util.List;
 public class RssService {
     public static final String FEED_TYPE = "rss_2.0";
     @Autowired
-    @Qualifier("appUri")
-    public String appUri;
+    @Qualifier("appUrl")
+    public String appUrl;
     @Autowired
     @Qualifier("appName")
     public String appName;
@@ -117,7 +117,7 @@ public class RssService {
     private SyndFeed generateDefaultFeed() {
         SyndFeed feed = new SyndFeedImpl();
         feed.setFeedType(RssService.FEED_TYPE);
-        feed.setLink(appUri);
+        feed.setLink(appUrl);
         feed.setAuthor(getAppName());
         feed.setTitle(getAppName() + " feed");
         return feed;

@@ -15,6 +15,7 @@ import com.orange.clara.tool.model.EnumOauthProvider;
 public class InfoResponse {
 
     private EnumOauthProvider oauthProviderType;
+    private String webSocketEndpoint;
 
     public EnumOauthProvider getOauthProviderType() {
         return oauthProviderType;
@@ -22,6 +23,14 @@ public class InfoResponse {
 
     public void setOauthProviderType(EnumOauthProvider oauthProviderType) {
         this.oauthProviderType = oauthProviderType;
+    }
+
+    public String getWebSocketEndpoint() {
+        return webSocketEndpoint;
+    }
+
+    public void setWebSocketEndpoint(String webSocketEndpoint) {
+        this.webSocketEndpoint = webSocketEndpoint;
     }
 
     @Override

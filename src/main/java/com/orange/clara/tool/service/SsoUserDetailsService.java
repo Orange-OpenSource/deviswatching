@@ -102,7 +102,10 @@ public class SsoUserDetailsService extends UserInfoTokenServices implements Reso
     private User getUserGithub(Map<String, Object> userInfos) {
         String uuid = String.valueOf((Integer) userInfos.get("id"));
         if (this.userRepo.exists(uuid)) {
-            return this.userRepo.findOne(uuid);
+            User user = this.userRepo.findOne(uuid);
+            user.updateLastWatch();
+            this.userRepo.save(user);
+            return user;
         }
         return this.createUser(uuid, (String) userInfos.get("login"), (String) userInfos.get("email"));
     }
@@ -153,6 +156,7 @@ public class SsoUserDetailsService extends UserInfoTokenServices implements Reso
         Map<String, Object> details = Maps.newHashMap();
         details.put("email", user.getEmail());
         details.put("name", user.getName());
+        details.put("last_watch", user.getLastWatch());
         return details;
     }
 }

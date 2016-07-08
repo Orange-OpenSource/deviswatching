@@ -34,8 +34,10 @@ import java.util.concurrent.Executor;
  */
 @Configuration
 public class AppConfig {
+    @Value("#{${use.ssl:false} ? 'https://' : 'http://'}")
+    private String appProtocol;
 
-    @Value("#{${use.ssl:false} ? 'https://' : 'http://'}${vcap.application.uris[0]:localhost:8080}")
+    @Value("${vcap.application.uris[0]:localhost:8081}")
     private String appUri;
 
     @Value("${vcap.application.name:deviswatching}")
@@ -54,6 +56,11 @@ public class AppConfig {
     @Bean
     public Executor taskExecutor() {
         return new SimpleAsyncTaskExecutor();
+    }
+
+    @Bean
+    public String appUrl() {
+        return appProtocol + this.appUri;
     }
 
     @Bean

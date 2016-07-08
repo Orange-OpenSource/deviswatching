@@ -1,5 +1,6 @@
 package com.orange.clara.tool.controllers.info;
 
+import com.orange.clara.tool.config.WebSocketConfig;
 import com.orange.clara.tool.model.EnumOauthProvider;
 import com.orange.clara.tool.model.response.InfoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,15 @@ public class InfoController {
     @Qualifier("oauthProvider")
     private EnumOauthProvider oauthProvider;
 
+    @Autowired
+    @Qualifier("appUri")
+    private String appUri;
+
     @RequestMapping(method = RequestMethod.GET, value = "/app")
     public InfoResponse getInformation() {
         InfoResponse infoResponse = new InfoResponse();
         infoResponse.setOauthProviderType(oauthProvider);
+        infoResponse.setWebSocketEndpoint(appUri + WebSocketConfig.WEB_SOCKET_ENDPOINT);
         return infoResponse;
     }
 }

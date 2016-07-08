@@ -23,7 +23,7 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 @EnableWebSocketMessageBroker
 @ComponentScan(basePackages = "com.orange.clara.tool")
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
-
+    public final static String WEB_SOCKET_ENDPOINT = "/ws";
     private WebSocketOauthHandler webSocketOauthHandler;
 
     @Override
@@ -35,7 +35,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws")
+        registry.addEndpoint(WEB_SOCKET_ENDPOINT)
                 .setAllowedOrigins("*")
                 .setHandshakeHandler(this.webSocketOauthHandler)
                 .withSockJS();
